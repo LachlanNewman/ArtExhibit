@@ -7,12 +7,12 @@
     android:layout_height="match_parent"
     tools:context="com.lachlannewman.artexhibit.ui.LoginActivity">
 
-    <Button
-        android:id="@+id/loginButton"
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/loginButtonGoogle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:text="Login"
         android:layout_centerVertical="true"
-        android:text="Login"/>
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
 

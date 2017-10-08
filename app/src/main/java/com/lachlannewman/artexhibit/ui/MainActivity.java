@@ -13,11 +13,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
 
 import com.lachlannewman.artexhibit.R;
+import com.lachlannewman.artexhibit.models.Exhibition;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
+
+    public static final String EXHIBIT_ID = "Exhibit_Id";
+
+    private Exhibition exhibtion;
+    private TextView artExhibitTitle;
+    private TextView artExhibitLocation;
+    private TextView artExhibitDateTime;
+    private TextView artExhibitDesc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +37,18 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Intent intent = getIntent();
+        exhibtion = intent.getParcelableExtra(ExibitionActivity.EXHIBITION);
+        artExhibitTitle = (TextView) findViewById(R.id.artExhibitTitle);
+        artExhibitLocation = (TextView) findViewById(R.id.artExhibitLocation);
+        artExhibitDateTime = (TextView) findViewById(R.id.artExhibitDateTime);
+        artExhibitDesc = (TextView) findViewById(R.id.artExhibitDescription);
+
+        artExhibitTitle.setText(exhibtion.getTitle());
+        artExhibitLocation.setText(exhibtion.getLocation());
+        artExhibitDateTime.setText(exhibtion.getDate() + " at " + exhibtion.getTime());
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +67,32 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+ /*       GetExhibtion exhibtion = new GetExhibtion();
+        try {
+            String jsonData = exhibtion.execute().get();
+            Log.d(TAG,jsonData);
+            parseExibtion(jsonData);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        */
     }
+
+   /* private void parseExibtion(String jsonData) throws JSONException {
+        JSONArray json = new JSONObject(jsonData).getJSONArray("items");
+        JSONObject jsonExhibit = json.getJSONObject(0);
+        exhibtion = new Exhibition();
+        exhibtion.setTitle(jsonExhibit.getString("exibition"));
+        exhibtion.setDate(jsonExhibit.getString("date"));
+        exhibtion.setLocation(jsonExhibit.getString("location"));
+*/
+
+
 
     @Override
     public void onBackPressed() {
@@ -104,6 +153,32 @@ public class MainActivity extends AppCompatActivity
 
     private void startGalleryActivity() {
         Intent intent = new Intent(this,GalleryActivity.class);
+        intent.putExtra(EXHIBIT_ID,exhibtion.getExhibit_id());
         startActivity(intent);
     }
+/*
+    private class GetExhibtion extends AsyncTask<Void,Void,String> {
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            String url = "https://artexhibitapplication.appspot.com/_ah/api/exhibitApiApi/v1/exhibitApi";
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder().url(url).build();
+            Call call = client.newCall(request);
+            String json = null;
+            try {
+                Response response = client.newCall(request).execute();
+                if (response.isSuccessful()) {
+                    json = response.body().string();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(String jsonData) {
+        }
+    } */
 }

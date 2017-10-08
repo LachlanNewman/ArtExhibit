@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lachlannewman.artexhibit.ui.ArtworkActivity">
+
+    <ImageView
+        android:id="@+id/artworkImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/sampleimg"
+        android:layout_marginTop="39dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/artworkTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/artworkImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="40dp"
+        android:textSize="18sp"
+        tools:text="Mona Lisa"/>
+
+    <TextView
+        android:id="@+id/artworkArtist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/artworkTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:textSize="18sp"
+        tools:text="Leonado Di CAprico"/>
+
+    <TextView
+        android:id="@+id/artworkStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/artworkArtist"
+        android:layout_centerHorizontal="true"
+        android:textSize="14sp"
+        tools:text="Portait"/>
+
+    <TextView
+        android:id="@+id/artworkPeriod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/artworkStyle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        tools:text="Old Chool"/>
+
+    <TextView
+        android:id="@+id/artworkCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/forSaleText"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/black"
+        tools:text="$10000000.00"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/directionsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Directions"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/purchaseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/artworkArtist"
+        android:layout_alignLeft="@+id/artworkArtist"
+        android:layout_alignRight="@+id/artworkArtist"
+        android:layout_alignStart="@+id/artworkArtist"
+        android:layout_below="@+id/artworkCost"
+        android:text="Purchase"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/forSaleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/purchaseButton"
+        android:layout_alignLeft="@+id/purchaseButton"
+        android:layout_alignRight="@+id/purchaseButton"
+        android:layout_alignStart="@+id/purchaseButton"
+        android:layout_below="@+id/artworkPeriod"
+        android:layout_marginTop="29dp"
+        android:background="#9def99"
+        android:shadowColor="#2b3a2a"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        tools:text="For Sale"/>
+
+</RelativeLayout>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,4 +9,47 @@
     tools:context="com.lachlannewman.artexhibit.ui.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/artExhibitTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="246dp"
+        tools:text="Art Exhibtion"/>
+
+    <TextView
+        android:id="@+id/artExhibitLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/artExhibitTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp"
+        tools:text="rgaerbdafbafgagas"/>
+
+    <TextView
+        android:id="@+id/artExhibitDateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:layout_below="@+id/artExhibitLocation"
+        android:layout_alignRight="@+id/artExhibitLocation"
+        android:layout_alignEnd="@+id/artExhibitLocation"
+        android:layout_alignLeft="@+id/artExhibitLocation"
+        android:layout_alignStart="@+id/artExhibitLocation"/>
+
+    <TextView
+        android:id="@+id/artExhibitDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        tools:text="jfbeurigq rgeeqrbg rejgneiorgnoqerg regoeqrngerq erfiqeornfer erfiqefnqe eqrfiooeqrnfiorqe eqrfoiernfonerfn ejrnfioernfoeqf efniowqenfweb ejfnqenf erfeuif efqnefnw wefnwefn uewfqfn "/>
+</RelativeLayout>
