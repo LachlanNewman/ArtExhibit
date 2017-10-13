@@ -91,6 +91,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             GoogleSignInAccount acct = result.getSignInAccount();
             Log.d(TAG,acct.getDisplayName().toString());
             username = acct.getDisplayName();
+            emailAddress= acct.getEmail();
             userId = UUID.randomUUID().toString();
             password= "Quiditch8";
         } else {
@@ -101,6 +102,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         CognitoUserPool userPool = new CognitoUserPool(this, POOL_ID, CLIENT_ID, CLIENT_SECRET);
 
         CognitoUserAttributes userAttributes = new CognitoUserAttributes();
+        userAttributes.addAttribute("given_name", username);
+        userAttributes.addAttribute("email", emailAddress);
+
 
 // Add the user attributes. Attributes are added as key-value pairs
 // Adding user's given name.
