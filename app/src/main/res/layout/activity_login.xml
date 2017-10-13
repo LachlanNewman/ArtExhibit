@@ -7,12 +7,24 @@
     android:layout_height="match_parent"
     tools:context="com.lachlannewman.artexhibit.ui.LoginActivity">
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/loginButtonGoogle"
+    <ImageButton
+        android:id="@+id/loginGoogle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:layout_centerVertical="true"
+        app:srcCompat="@drawable/logingoogle"
+        android:layout_marginTop="143dp"
+        android:layout_below="@+id/title"
         android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="66dp"
+        android:text="Art Application"
+        android:textAlignment="center"
+        android:textSize="30sp"/>
 </RelativeLayout>
 

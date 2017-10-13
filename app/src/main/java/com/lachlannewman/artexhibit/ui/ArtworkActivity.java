@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.lachlannewman.artexhibit.R;
 import com.lachlannewman.artexhibit.models.Artwork;
+import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -26,6 +27,7 @@ public class ArtworkActivity extends AppCompatActivity {
     private TextView artworkArtist;
     private TextView artworkStyle;
     private TextView artworkPeriod;
+    private TextView roomId;
     private TextView forSaleText;
     private TextView artworkCost;
     private ImageView artworkImage;
@@ -42,6 +44,7 @@ public class ArtworkActivity extends AppCompatActivity {
         artworkArtist = (TextView) findViewById(R.id.artworkArtist);
         artworkStyle = (TextView) findViewById(R.id.artworkStyle);
         artworkPeriod = (TextView) findViewById(R.id.artworkPeriod);
+        roomId = (TextView) findViewById(R.id.roomText);
         forSaleText = (TextView) findViewById(R.id.forSaleText);
         artworkCost = (TextView) findViewById(R.id.artworkCost);
         purchaseButton = (Button) findViewById(R.id.purchaseButton);
@@ -54,7 +57,9 @@ public class ArtworkActivity extends AppCompatActivity {
         artworkArtist.setText(mArtwork.getArtist());
         artworkStyle.setText(mArtwork.getArtStyle());
         artworkPeriod.setText(mArtwork.getArtPeriod());
-        artworkImage.setImageDrawable(LoadImageFromWebOperations(mArtwork.getImgUrl()));
+        roomId.setText("Location: Room " + mArtwork.getRoomId());
+        Picasso.with(this).load(mArtwork.getImgUrl()).into(artworkImage);
+        artworkImage.setMaxHeight(30);
         if(mArtwork.isForSale()){
             forSaleText.setBackgroundColor(getResources().getColor(R.color.forSale));
             forSaleText.setText("For Sale");

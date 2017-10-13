@@ -1,6 +1,7 @@
 package com.lachlannewman.artexhibit.adapters;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,11 @@ import android.widget.TextView;
 
 import com.lachlannewman.artexhibit.R;
 import com.lachlannewman.artexhibit.models.Artwork;
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Created by Lachlan Newman on 4/10/2017.
@@ -55,8 +61,8 @@ public class GalleryAdapter extends BaseAdapter {
         else{
             viewHolder = (GalleryViewHolder) view.getTag();
         }
-
         Artwork artwork = mArtworks[i];
+        Picasso.with(mContext).load(artwork.getImgUrl()).into(viewHolder.artworkImg);
         viewHolder.title.setText(artwork.getTitle());
         viewHolder.artist.setText(artwork.getArtist());
 
