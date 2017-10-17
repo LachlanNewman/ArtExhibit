@@ -11,7 +11,7 @@
         android:id="@+id/artworkImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/sampleimg"
+        app:srcCompat="@drawable/ic_menu_gallery"
         android:layout_marginTop="39dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"/>

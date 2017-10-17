@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void startGalleryActivity() {
-        Intent intent = new Intent(this,GalleryActivity.class);
+        Intent intent = new Intent(this, GalleryActivity.class);
         intent.putExtra(EXHIBIT_ID,exhibtion.getExhibit_id());
         startActivity(intent);
     }

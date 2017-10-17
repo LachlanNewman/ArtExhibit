@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "598619687256",
+    "project_id": "firebase-exhibition"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598619687256:android:e8e5b0eab0377e6f",
+        "android_client_info": {
+          "package_name": "com.lachlannewman.artexhibit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "598619687256-mntqd0oionbtprmh5c0cuglkiirbkm48.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5AT4JOiWLsnGA6m35WhzWlr_yoLQ2YzE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

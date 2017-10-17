@@ -14,7 +14,7 @@
         android:paddingRight="10dp"
         android:paddingTop="10dp"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/sampleimg"/>
+        app:srcCompat="@drawable/ic_menu_gallery"/>
 
     <TextView
         android:id="@+id/galleryTitle"
