@@ -7,6 +7,6 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="facebook_app_id">285883355243332</string>
-    <string name="fb_login_protocol_scheme">fb285883355243332</string>
+    <string name="cognito_client_id">1eonv1c29okn1goqfc18f3hak8</string>
+    <string name="cognito_client_secret">19lg2s89q6o5lqh7s5ihcg0qlr4pe6ta7iqq8v3i7mgo6ct4tr3h</string>
 </resources>

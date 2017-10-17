@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.amazonaws.ClientConfiguration;
@@ -14,96 +15,79 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserAttributes;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserCodeDeliveryDetails;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserPool;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserSession;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.AuthenticationContinuation;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.AuthenticationDetails;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.MultiFactorAuthenticationContinuation;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.AuthenticationHandler;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.GenericHandler;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.SignUpHandler;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.lachlannewman.artexhibit.R;
 
 import java.util.UUID;
 
 
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class LoginActivity extends AppCompatActivity {
 
     private static final String POOL_ID = "us-east-2_FVKIHt2MH";
-    private static final String CLIENT_ID = "1eonv1c29okn1goqfc18f3hak8";
-    private static final String CLIENT_SECRET = "19lg2s89q6o5lqh7s5ihcg0qlr4pe6ta7iqq8v3i7mgo6ct4tr3h";
-    private static final int SIGN_IN_CODE = 9001;
     private static final String TAG = LoginActivity.class.getSimpleName();
 
-    private ImageButton loginGoogle;
-    private String username;
-    private String emailAddress;
-    private String userId;
-    private String password;
+    private EditText userName;
+    private EditText password;
+    private EditText email;
+    private EditText verificaton;
+    private Button signUpButton;
+
+    private EditText authUserName;
+    private EditText authPassword;
+    private Button loginButton;
+
+    private CognitoUser user;
+    private CognitoUserPool userPool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
+        userName = (EditText) findViewById(R.id.userName);
+        password = (EditText) findViewById(R.id.userPassword);
+        email = (EditText) findViewById(R.id.userEmail);
+        verificaton = (EditText) findViewById(R.id.verificationCode);
+        signUpButton = (Button) findViewById(R.id.signUpButton);
 
-        final GoogleApiClient mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-
-        loginGoogle = (ImageButton) findViewById(R.id.loginGoogle);
-        loginGoogle.setOnClickListener(new View.OnClickListener() {
+        signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startMainActivity(mGoogleApiClient);
+                cognitoUser();
             }
         });
 
+        authUserName = (EditText) findViewById(R.id.authUserName);
+        authPassword = (EditText) findViewById(R.id.authUserPassword);
+        loginButton = (Button) findViewById(R.id.loginButton);
 
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startExhibitActivity();
+            }
+        });
+
+        userPool = new CognitoUserPool(this, POOL_ID, getString(R.string.cognito_client_id), getString(R.string.cognito_client_secret));
+        user = userPool.getCurrentUser();
 
     }
 
-    private void startMainActivity(GoogleApiClient mGoogleApiClient) {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent,SIGN_IN_CODE);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == SIGN_IN_CODE) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleSignInResult(result);
-        }
-    }
-
-    private void handleSignInResult(GoogleSignInResult result) {
-        Log.d(TAG, "handleSignInResult:" + result.getStatus().getStatusCode());
-        if (result.isSuccess()) {
-            // Signed in successfully, show authenticated UI.
-            GoogleSignInAccount acct = result.getSignInAccount();
-            Log.d(TAG,acct.getDisplayName().toString());
-            username = acct.getDisplayName();
-            emailAddress= acct.getEmail();
-            userId = UUID.randomUUID().toString();
-            password= "Quiditch8";
-        } else {
-            Log.d(TAG,"error not able to login");
-        }
+    private void cognitoUser() {
         ClientConfiguration clientConfiguration = new ClientConfiguration();
 
-        CognitoUserPool userPool = new CognitoUserPool(this, POOL_ID, CLIENT_ID, CLIENT_SECRET);
+        CognitoUserPool userPool = new CognitoUserPool(this, POOL_ID, getString(R.string.cognito_client_id), getString(R.string.cognito_client_secret));
 
         CognitoUserAttributes userAttributes = new CognitoUserAttributes();
-        userAttributes.addAttribute("given_name", username);
-        userAttributes.addAttribute("email", emailAddress);
+        userAttributes.addAttribute("email", email.getText().toString());
 
 
 // Add the user attributes. Attributes are added as key-value pairs
@@ -115,7 +99,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         SignUpHandler signUpHandler = new SignUpHandler() {
             @Override
             public void onSuccess(CognitoUser user, boolean signUpConfirmationState, CognitoUserCodeDeliveryDetails cognitoUserCodeDeliveryDetails) {
-                startExhibitActivity();
+                signUpButton.setText("Submit Code");
+                signUpButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startExhibitActivity();
+                    }
+                });
             }
 
             @Override
@@ -124,9 +114,28 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         };
 
-        CognitoUser user = userPool.getCurrentUser();
 
-        userPool.signUpInBackground(userId,password,userAttributes, null, signUpHandler);
+
+        userPool.signUpInBackground(userName.getText().toString(),password.getText().toString(),userAttributes, null, signUpHandler);
+
+    }
+
+    public void verifyUser() {
+
+        GenericHandler handler = new GenericHandler() {
+
+            @Override
+            public void onSuccess() {
+                // User was successfully confirmed!
+            }
+
+            @Override
+            public void onFailure(Exception exception) {
+                // Confirmation failed, probe exception for details
+            }
+        };
+        String code = verificaton.getText().toString();
+        user.confirmSignUp(code,false,handler);
     }
 
     private void startExhibitActivity() {
@@ -134,8 +143,4 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         startActivity(intent);
     }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
 }

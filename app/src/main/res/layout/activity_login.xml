@@ -7,24 +7,102 @@
     android:layout_height="match_parent"
     tools:context="com.lachlannewman.artexhibit.ui.LoginActivity">
 
-    <ImageButton
-        android:id="@+id/loginGoogle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/logingoogle"
-        android:layout_marginTop="143dp"
-        android:layout_below="@+id/title"
-        android:layout_centerHorizontal="true"/>
-
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="66dp"
+        android:layout_marginTop="34dp"
         android:text="Art Application"
         android:textAlignment="center"
-        android:textSize="30sp"/>
+        android:textSize="30sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:layout_below="@+id/loginButton"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/userEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textPersonName"
+        android:layout_below="@+id/userPassword"
+        android:layout_alignLeft="@+id/userPassword"
+        android:layout_alignStart="@+id/userPassword"/>
+
+    <EditText
+        android:id="@+id/userPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/userName"
+        android:layout_alignRight="@+id/userName"
+        android:layout_below="@+id/userName"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        />
+
+    <Button
+        android:id="@+id/signUpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/authUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:layout_below="@+id/title"
+        android:layout_alignLeft="@+id/authUserPassword"
+        android:layout_alignStart="@+id/authUserPassword"/>
+
+    <EditText
+        android:id="@+id/authUserPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/userName"
+        android:layout_alignStart="@+id/userName"
+        android:layout_below="@+id/authUserName"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log In"
+        android:layout_below="@+id/authUserPassword"
+        android:layout_alignLeft="@+id/signUpButton"
+        android:layout_alignStart="@+id/signUpButton"
+        android:layout_marginTop="27dp"/>
+
+    <EditText
+        android:id="@+id/verificationCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userEmail"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="Enter Verification Code"
+        android:inputType="textPersonName"
+        />
+
 </RelativeLayout>
 

@@ -26,6 +26,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -36,9 +37,4 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.2.+'
     testCompile 'junit:junit:4.12'
-    compile 'com.google.android.gms:play-services-auth:10.2.0'
-    compile 'com.google.android.gms:play-services-identity:10.2.0'
-    compile 'com.google.android.gms:play-services:10.2.0'
 }
-
-apply plugin: 'com.google.gms.google-services'
