@@ -22,6 +22,8 @@ import java.net.URL;
 
 public class ArtworkActivity extends AppCompatActivity {
 
+    public static final String ROOM_ID = "room id";
+
     private Artwork mArtwork;
     private TextView artworkTitle;
     private TextView artworkArtist;
@@ -49,7 +51,22 @@ public class ArtworkActivity extends AppCompatActivity {
         artworkCost = (TextView) findViewById(R.id.artworkCost);
         purchaseButton = (Button) findViewById(R.id.purchaseButton);
         artworkImage = (ImageView) findViewById(R.id.artworkImage);
+        directionsButton = (Button) findViewById(R.id.directionsButton);
+
+        directionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToDirections();
+            }
+        });
         setView();
+    }
+
+    private void goToDirections() {
+        Intent intent = new Intent(this,MapActivity.class);
+        intent.putExtra(ROOM_ID,roomId.getText().toString());
+        startActivity(intent);
+
     }
 
     private void setView() {

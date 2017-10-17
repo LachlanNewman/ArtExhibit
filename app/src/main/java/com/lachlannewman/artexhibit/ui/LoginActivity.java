@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
@@ -25,12 +26,14 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.SignUpHan
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.lachlannewman.artexhibit.R;
+import com.lachlannewman.artexhibit.models.User;
 
 import java.util.UUID;
 
 
 public class LoginActivity extends AppCompatActivity {
 
+    public static final String USER = "User";
     private static final String POOL_ID = "us-east-2_FVKIHt2MH";
     private static final String TAG = LoginActivity.class.getSimpleName();
 
@@ -43,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText authUserName;
     private EditText authPassword;
     private Button loginButton;
+    private ImageView socialLogin;
+
 
     private CognitoUser user;
     private CognitoUserPool userPool;
@@ -55,18 +60,10 @@ public class LoginActivity extends AppCompatActivity {
         userName = (EditText) findViewById(R.id.userName);
         password = (EditText) findViewById(R.id.userPassword);
         email = (EditText) findViewById(R.id.userEmail);
-        verificaton = (EditText) findViewById(R.id.verificationCode);
-        signUpButton = (Button) findViewById(R.id.signUpButton);
+        socialLogin = (ImageView) findViewById(R.id.socialLogins);
 
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cognitoUser();
-            }
-        });
 
-        authUserName = (EditText) findViewById(R.id.authUserName);
-        authPassword = (EditText) findViewById(R.id.authUserPassword);
+
         loginButton = (Button) findViewById(R.id.loginButton);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +76,20 @@ public class LoginActivity extends AppCompatActivity {
         userPool = new CognitoUserPool(this, POOL_ID, getString(R.string.cognito_client_id), getString(R.string.cognito_client_secret));
         user = userPool.getCurrentUser();
 
+        socialLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startExhibitActivitySocial();
+            }
+        });
+
+    }
+
+    private void startExhibitActivitySocial() {
+        User user = new User("Socail Username","Social Email address");
+        Intent intent = new Intent(this,ExibitionActivity.class);
+        intent.putExtra(USER,user);
+        startActivity(intent);
     }
 
     private void cognitoUser() {
@@ -139,7 +150,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void startExhibitActivity() {
+        User user = new User(userName.getText().toString(),email.getText().toString());
         Intent intent = new Intent(this,ExibitionActivity.class);
+        intent.putExtra(USER,user);
         startActivity(intent);
     }
 

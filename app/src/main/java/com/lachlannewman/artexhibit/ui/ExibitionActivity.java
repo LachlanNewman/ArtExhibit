@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.lachlannewman.artexhibit.R;
 import com.lachlannewman.artexhibit.adapters.ExhibitionAdapter;
 import com.lachlannewman.artexhibit.models.Exhibition;
+import com.lachlannewman.artexhibit.models.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,11 +34,23 @@ public class ExibitionActivity extends AppCompatActivity implements AdapterView.
 
     private Exhibition[] exhibitions;
     private ListView mListView;
+    private Button getUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exibition);
+        getUser = (Button) findViewById(R.id.viewUser);
+
+        getUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = getIntent();
+                User user = intent.getParcelableExtra(LoginActivity.USER);
+                viewUserDetails(user);
+            }
+        });
+
         mListView = (ListView) findViewById(R.id.list_item);
         GetExhibtions getExhibtions = new GetExhibtions();
         try {
@@ -53,6 +67,12 @@ public class ExibitionActivity extends AppCompatActivity implements AdapterView.
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void viewUserDetails(User user) {
+        Intent intent = new Intent(this,UserActivity.class);
+        intent.putExtra(LoginActivity.USER,user);
+        startActivity(intent);
     }
 
     private void parseExhibtions(String jsonData) throws JSONException {
